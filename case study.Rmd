@@ -2,7 +2,7 @@
 title: "case study"
 author: "Huili Zheng"
 date: "10/14/2021"
-output: github_document
+output: html_document
 ---
 
 ```{r setup, include=FALSE}
@@ -25,8 +25,8 @@ options(
 
 scale_colour_discrete = scale_colour_viridis_d
 scale_fill_discrete = scale_fill_viridis_d
-library(p8105.datasets)
-data(nyc_airbnb)
+#library(p8105.datasets)
+#data(nyc_airbnb)
 ```
 
 ## load the dataset
@@ -65,7 +65,7 @@ is price correlated with the review score?
 look at price and room type
 ```{r}
 nyc_airbnb %>%
-  ggplot(aes(x =stars, y = price)) +
+  ggplot(aes(x = stars, y = price)) +
   geom_point()
 ```
 
@@ -109,11 +109,36 @@ nyc_airbnb %>%
 
 ## retry leaflet
 
-```{r, eval = FALSE}
-nyc_airbnb %>%
+```{r, eval = FALSE}  
+
+pal = colorNumeric("viridis",NULL)
+
+nyc_airbnb%>%
+  mutate(
+    labels = str_c("<b>Price:",price,"</b><br>Stars:",stars)
+  ) %>%
   leaflet() %>%
-  addTiles() %>%
-  addMarkers(~lat, ~long)
+  addProviderTiles(providers$CartoDB.Positron) %>%  ##check for leaflet for R
+  addCircleMarkers(~lat, ~long, radius = 1, color = ~pal(price), popup = ~labels)
+
+nyc_airbnb %>%  
+  filter(price <500) %>%
+  sample_n(1000) %>%
+  leaflet() %>%
+  addProviderTiles(providers$CartoDB.Positron) %>%  ##check for leaflet for R
+  #addTiles() %>%
+  #addMarkers(~lat, ~long)
+  addCircleMarkers(~lat, ~long, radius = 1, color = ~pal(price))
 
 ```
+
+
+
+
+
+
+
+
+
+
 
