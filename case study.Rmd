@@ -69,10 +69,6 @@ nyc_airbnb %>%
   geom_point()
 ```
 
-```{r}
-
-
-```
 
 ```{r}
 
@@ -109,7 +105,7 @@ nyc_airbnb %>%
 
 ## retry leaflet
 
-```{r, eval = FALSE}  
+```{r, evale = FALSE}  
 
 pal = colorNumeric("viridis",NULL)
 
