@@ -74,7 +74,7 @@ nyc_airbnb %>%
 
 nyc_airbnb %>%
   filter(borough == "Manhattan") %>%
-  group_by(neighbourhood)%>%
+  group_by(neighbourhood) %>%
   summarize(mean_price = mean(price, na.rm = TRUE)) %>%
   arrange(mean_price)
 
@@ -109,7 +109,7 @@ nyc_airbnb %>%
 
 pal = colorNumeric("viridis",NULL)
 
-nyc_airbnb%>%
+nyc_airbnb %>%
   mutate(
     labels = str_c("<b>Price:",price,"</b><br>Stars:",stars)
   ) %>%
