@@ -25,14 +25,13 @@ options(
 
 scale_colour_discrete = scale_colour_viridis_d
 scale_fill_discrete = scale_fill_viridis_d
-#library(p8105.datasets)
-#data(nyc_airbnb)
+library(p8105.datasets)
 ```
 
 ## load the dataset
 
 ```{r}
-nyc_airbnb = read_csv('nyc_airbnb.csv')
+data(nyc_airbnb)
 ```
 
 
@@ -118,7 +117,7 @@ nyc_airbnb %>%
   addCircleMarkers(~lat, ~long, radius = 1, color = ~pal(price), popup = ~labels)
 
 nyc_airbnb %>%  
-  filter(price <500) %>%
+  filter(price < 500) %>%
   sample_n(1000) %>%
   leaflet() %>%
   addProviderTiles(providers$CartoDB.Positron) %>%  ##check for leaflet for R
